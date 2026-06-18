@@ -105,7 +105,7 @@
         <a href="/dashboard">Dashboard</a>
         <a href="/barang/create">Barang Masuk</a>
         <a href="/barang">Daftar Barang</a>
-        <a href="#">Laporan</a>
+
       </div>
 
       <div class="footer-col">

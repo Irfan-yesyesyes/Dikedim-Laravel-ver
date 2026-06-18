@@ -26,7 +26,6 @@
     <ul class="navbar__nav" id="navMenu">
       <li><a href="#" class="active">Beranda</a></li>
       <li><a href="#">Barang</a></li>
-      <li><a href="#">Laporan</a></li>
       <li><a href="#">Pengaturan</a></li>
     </ul>
   </nav>
@@ -230,7 +229,7 @@
         <a href="#">Beranda</a>
         <a href="#">Barang Masuk</a>
         <a href="#">Daftar Barang</a>
-        <a href="#">Laporan</a>
+
         <a href="#">Pengaturan</a>
       </div>
 
@@ -600,7 +599,7 @@
                             <li><a href="#" class="hover:text-accent-400 transition-colors">Beranda</a></li>
                             <li><a href="#" class="hover:text-accent-400 transition-colors">Barang Masuk</a></li>
                             <li><a href="#" class="hover:text-accent-400 transition-colors">Daftar Barang</a></li>
-                            <li><a href="#" class="hover:text-accent-400 transition-colors">Laporan</a></li>
+
                             <li><a href="#" class="hover:text-accent-400 transition-colors">Pengaturan</a></li>
                         </ul>
                     </div>

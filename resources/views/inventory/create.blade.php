@@ -26,7 +26,6 @@
     <ul class="navbar__nav" id="navMenu">
       <li><a href="/dashboard">Dashboard</a></li>
       <li><a href="/barang" class="active">Barang</a></li>
-      <li><a href="#">Laporan</a></li>
       <li><a href="#" onclick="logout()">Logout</a></li>
     </ul>
   </nav>
@@ -229,7 +228,6 @@
         <a href="/dashboard">Dashboard</a>
         <a href="/barang/create">Barang Masuk</a>
         <a href="/barang">Daftar Barang</a>
-        <a href="#">Laporan</a>
       </div>
 
       <div class="footer-col">

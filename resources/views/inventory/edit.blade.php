@@ -26,7 +26,6 @@
     <ul class="navbar__nav" id="navMenu">
       <li><a href="/dashboard">Dashboard</a></li>
       <li><a href="/barang" class="active">Barang</a></li>
-      <li><a href="#">Laporan</a></li>
       <li><a href="#" onclick="logout()">Logout</a></li>
     </ul>
   </nav>
@@ -60,7 +59,14 @@
       <div class="form-card">
         <h2>✏️ Form Edit Barang</h2>
 
-        <form action="{{ route('barang.update', $barang) }}" method="POST" enctype="multipart/form-data" x-data="{ fotoPreview: null }">
+        <form action="{{ route('barang.update', $barang) }}" method="POST" enctype="multipart/form-data" x-data="{
+          fotoPreview: '{{ $barang->foto ? Storage::url($barang->foto) : '' }}',
+          initializePreview() {
+            if (!this.fotoPreview) {
+              this.$watch('fotoPreview', () => this.$nextTick());
+            }
+          }
+        }" @load="initializePreview()">
           @csrf
           @method('PUT')
 
@@ -161,6 +167,48 @@
             </div>
           </div>
 
+          <!-- Foto Barang -->
+          <div class="form-section">
+            <h3>4. Foto Barang</h3>
+            <div class="form-group">
+              <label>Ganti Foto</label>
+              <label for="foto" class="file-upload-area">
+                <span style="font-size: 2rem;">📸</span>
+                <p>Klik untuk memilih atau drag & drop</p>
+                <p style="font-size: 0.9rem; color: #999;">JPG, PNG, atau WebP (Maksimal 2MB) - Kosongkan jika tidak ingin mengubah</p>
+                <input type="file" id="foto" name="foto" accept="image/jpeg,image/png,image/webp"
+                       class="hidden"
+                       x-on:change="
+                           const file = $el.files[0];
+                           if (file) {
+                               if (!file.type.match('image/.*')) {
+                                   alert('File harus berupa gambar (JPG, PNG, atau WebP)');
+                                   $el.value = '';
+                                   return;
+                               }
+                               if (file.size > 2048 * 1024) {
+                                   alert('Ukuran file tidak boleh lebih dari 2MB');
+                                   $el.value = '';
+                                   return;
+                               }
+                               const reader = new FileReader();
+                               reader.onload = (e) => {
+                                   fotoPreview = e.target.result;
+                               };
+                               reader.readAsDataURL(file);
+                           }
+                       ">
+              </label>
+              @error('foto')<span class="form-error-msg">{{ $message }}</span>@enderror
+            </div>
+
+            <!-- Preview -->
+            <div style="margin-top: 1rem;">
+              <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: #666;">Preview Foto:</p>
+              <img :src="fotoPreview" alt="Preview" style="max-width: 250px; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+          </div>
+
           <!-- Form Actions -->
           <div class="form-actions">
             <a href="{{ route('barang.index') }}" class="btn btn-secondary">
@@ -190,7 +238,6 @@
         <a href="/dashboard">Dashboard</a>
         <a href="/barang/create">Barang Masuk</a>
         <a href="/barang">Daftar Barang</a>
-        <a href="#">Laporan</a>
       </div>
 
       <div class="footer-col">

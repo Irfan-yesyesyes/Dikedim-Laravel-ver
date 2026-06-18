@@ -30,7 +30,6 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('barang.index') }}"><i class="bi bi-box-seam"></i> Stock Gudang</a></li>
                         <li><a class="dropdown-item" href="{{ route('petugas.index') }}"><i class="bi bi-people"></i> Daftar Petugas</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark"></i> Laporan</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Pengaturan</a></li>
                     </ul>

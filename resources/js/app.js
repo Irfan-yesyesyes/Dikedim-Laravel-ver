@@ -105,4 +105,43 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.style.fontWeight = 'bold';
         }
     });
+
+    // 5. Image Preview Handler (Fallback untuk Alpine.js)
+    const fotoInputs = document.querySelectorAll('input[name="foto"]');
+    fotoInputs.forEach(fileInput => {
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Validasi tipe file
+                if (!file.type.match('image/.*')) {
+                    alert('File harus berupa gambar (JPG, PNG, atau WebP)');
+                    this.value = '';
+                    return;
+                }
+
+                // Validasi ukuran file
+                if (file.size > 2048 * 1024) { // 2MB
+                    alert('Ukuran file tidak boleh lebih dari 2MB');
+                    this.value = '';
+                    return;
+                }
+
+                // Buat preview
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    // Find preview image in form
+                    const form = fileInput.closest('form');
+                    if (form) {
+                        const previewImg = form.querySelector('img[alt="Preview"]');
+                        if (previewImg) {
+                            previewImg.src = e.target.result;
+                            previewImg.style.display = 'block';
+                        }
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
 });
+
